@@ -14,11 +14,17 @@ def run_command(command):
         print("An error occurred:", e)
 
 def main():
+    title = "Awesome-config"
+    description = "\033[1;96m{title}:\033[0;1m\nEasy Configuration for the Awesome Tiling Window Manager\033[0m".format(title=title)
+
     parser = argparse.ArgumentParser(
-            #prog='awesome-config',
-            description='Easy Configuration for the Awesome Tiling Window Manager'
+            #prog=title,
+            description=description
             )
-    parser.add_argument("terminal", help="Change the default terminal", nargs=2)
+
+    parser.add_argument ("-show", help= "Show a parameter in the config, by default displays all default options ")
+    parser.add_argument ("-set", help="Change a parameter in the config")
+    parser.add_argument("terminal", help="default terminal", nargs=1)
 
     args = parser.parse_args()
 
