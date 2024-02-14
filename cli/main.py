@@ -13,10 +13,10 @@ def main():
             )
 
 
-    parser.add_argument ("-set", help="Change a parameter in the config", nargs=2 )
-    parser.add_argument ("-show", help= "Show a parameter in the config, by default displays all default options",nargs=1 )
-    parser.add_argument ("terminal", help="Default terminal", nargs="?")
-    parser.add_argument ("editor", help="Default editor", nargs='?')
+    parser.add_argument ("-set", help="Change a parameter in the config", nargs="?" )
+    parser.add_argument ("-show", help= "Show a parameter in the config, by default displays all default options",nargs="?" )
+    parser.add_argument ("parameter", help="The parameter to change", nargs="?")
+    parser.add_argument ("editor", help="Set a value", nargs='?')
 
     parser.parse_args()
 
@@ -25,23 +25,23 @@ def main():
     parametersList = ["terminal", "editor"]
 
     if args.show:
-        if args.show[0] in parametersList:
-            print(args.show[0])
+        if args.show in parametersList:
+            print(args.show)
         else:
-            print(args.show[0],"is not valid. Please enter a valid parameter ")
+            print(args.show,"is not valid. Please enter a valid parameter ")
     elif args.set:
         print(args.set)
-        if args.terminal:
-            print("TERMINAL: ",args.terminal)
-
-        elif args.editor:
-            print(args.editor)
+        if args.set in parametersList:
+            if args.parameter:
+                print("Setting: ",args.set, "=" ,args.parameter)
+            else:
+                print("Please specify " + args.set + " value")
         else:
-            print("Please specify " + args.set[0] + " value")
+            print(args.set,"is not valid. Please enter a valid parameter ")        
     else:
         print("Please specify a valid command\nWrite \033[0;1mawesome-config -h\033[0m for help")
 
-    print ("ARGUMENTS: ", args)
+    print ("NAMESPACE: ", args)
 
 if __name__ == "__main__":
     main()
